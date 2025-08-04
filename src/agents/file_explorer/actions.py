@@ -9,7 +9,15 @@ from src.framework.actions.decorators import register_tool
 @register_tool(tags=["file_operations", "read"])
 def read_project_file(name: str) -> str:
     """Read a file from the project"""
-    with open(name, "r", encoding='utf-8', errors='ignore') as f:
+    # Handle absolute paths
+    if os.path.isabs(name):
+        file_path = name
+    else:
+        # Prepend project root to relative paths
+        project_root = find_project_root()
+        file_path = os.path.join(project_root, name)
+    
+    with open(file_path, "r", encoding='utf-8', errors='ignore') as f:
         return f.read()
 
 @register_tool(tags=["file_operations", "list"])

@@ -29,7 +29,7 @@ class AgentFunctionCallingActionLanguage(AgentLanguage):
             if item["type"] == "assistant":
                 mapped_items.append({"role": "assistant", "content": content})
             elif item["type"] == "environment":
-                mapped_items.append({"role": "assistant", "content": content})
+                mapped_items.append({"role": "user", "content": content})
             else:
                 mapped_items.append({"role": "user", "content": content})
 
